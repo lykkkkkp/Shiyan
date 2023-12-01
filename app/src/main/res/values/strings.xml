@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">我的第一个应用</string>
-    <string name="Helloworld">Helloworld</string>
+    <string name="app_name" translatable="false">我的第一个应用</string>
+    <string name="Helloworld" translatable="false">Hello world</string>
+    <string name="hello_android">你好 Android</string>
 </resources>
