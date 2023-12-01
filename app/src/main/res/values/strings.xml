@@ -4,4 +4,5 @@
     <string name="hello_android">你好 Android</string>
     <string name="bookname1" />
     <string name="string_ok">ok</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
