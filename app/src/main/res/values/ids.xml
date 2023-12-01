@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="recycle_view_books" type="id">recycle_view_books</item>
+    <item name="text_view_book_title" type="id">text_view_book_title</item>
+    <item name="bookView_item1" type="id">bookView_item1</item>
+</resources>
