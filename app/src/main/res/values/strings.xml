@@ -3,4 +3,5 @@
     <string name="Helloworld" translatable="false">Hello world</string>
     <string name="hello_android">你好 Android</string>
     <string name="bookname1" />
+    <string name="string_ok">ok</string>
 </resources>

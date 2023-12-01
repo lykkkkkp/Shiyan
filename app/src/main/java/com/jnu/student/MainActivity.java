@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,15 +20,13 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        @SuppressLint("MissingInflatedId") RecyclerView mainRecyclerview=findViewById(R.id.recycle_view_books);
+        RecyclerView mainRecyclerview=findViewById(R.id.recycle_view_books);
         mainRecyclerview.setLayoutManager(new LinearLayoutManager(this));
 
         ArrayList<BookItem> bookItems=new ArrayList<>();
