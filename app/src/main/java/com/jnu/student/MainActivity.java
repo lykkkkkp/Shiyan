@@ -7,35 +7,40 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.jnu.student.data.BookItem;
+import com.jnu.student.date.BookItem;
+import com.jnu.student.date.DataBank;
 
 import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
+    private BookItemAdapter bookItemAdapter;
+
+    private ArrayList<BookItem> bookItems=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         RecyclerView mainRecyclerview=findViewById(R.id.recycle_view_books);
         mainRecyclerview.setLayoutManager(new LinearLayoutManager(this));
-        ArrayList<BookItem> bookItems=new ArrayList<>();
-        bookItems.add(new BookItem("软件项目管理案例教程（第4版）",R.drawable.book_2));
-        bookItems.add(new BookItem("创新工程实践",R.drawable.book_no_name));
-        bookItems.add(new BookItem("信息安全数学基础（第2版）",R.drawable.book_1));
 
-        BookItemAdapter bookItemAdapter =new BookItemAdapter(bookItems);
+        bookItems = new DataBank().LoadBookItems(MainActivity.this);
+        if(0==bookItems.size()){
+            bookItems.add(new BookItem("软件项目管理案例教程（第4版）",R.drawable.book_2));
+            bookItems.add(new BookItem("创新工程实践",R.drawable.book_no_name));
+            bookItems.add(new BookItem("信息安全数学基础（第2版）",R.drawable.book_1));
+        }
+
         mainRecyclerview.setAdapter(bookItemAdapter);
 
         registerForContextMenu(mainRecyclerview);
@@ -47,8 +52,10 @@ public class MainActivity extends AppCompatActivity {
                         Intent data = result.getData();
 
                         String name = data.getStringExtra("name");
-                        bookItems.add(new BookItem(name,R.drawable.book_2));
+                        bookItems.add(new BookItem(name,R.drawable.book_no_name));
                         bookItemAdapter.notifyItemInserted(bookItems.size());
+
+                        new DataBank().SaveBookItems(MainActivity.this,bookItems);
 
                         //获取返回的数据//在这塑可以根据需要进行进一步处理
                     } else if (result.getResultCode() == Activity.RESULT_CANCELED) {
@@ -56,21 +63,65 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+        updateItemLauncher= registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        int position = data.getIntExtra("position",0);
+                        String name = data.getStringExtra("name");
+                        BookItem bookItem = bookItems.get(position);
+                        bookItem.setName(name);
+                        bookItemAdapter.notifyItemChanged(position);
 
+                        new DataBank().SaveBookItems(MainActivity.this,bookItems);
+
+                        //获取返回的数据//在这塑可以根据需要进行进一步处理
+                    } else if (result.getResultCode() == Activity.RESULT_CANCELED) {
+
+                    }
+                }
+        );
     }
     ActivityResultLauncher<Intent> addItemLauncher;
+    ActivityResultLauncher<Intent> updateItemLauncher;
+    private static final int MENU_ITEM_ADD = 0;
+    private static final int MENU_ITEM_DELETE = 1;
+    private static final int MENU_ITEM_UPDATE = 2;
     public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item
-                .getMenuInfo();
+
         switch (item.getItemId()) {
-            case 0:
+            case MENU_ITEM_ADD:
 
                 Intent intent = new Intent(MainActivity.this,BookItemDetailsActivity.class);
                 addItemLauncher.launch(intent);
                 break;
-            case 1:
+            case MENU_ITEM_DELETE:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Delete Data");
+                builder.setMessage("Are you sure you want to delete this data?");
+                builder.setPositiveButton( "确定",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+                        bookItems.remove(item.getOrder());
+                        bookItemAdapter.notifyItemRemoved(item.getOrder());
+
+
+                        new DataBank().SaveBookItems(MainActivity.this,bookItems);
+                    }
+
+                });
+                builder.setNegativeButton( "取消",new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {}
+                });
+                builder.create().show();
                 break;
-            case 2:
+            case MENU_ITEM_UPDATE:
+                Intent intentUpdate = new Intent(MainActivity.this,BookItemDetailsActivity.class);
+                BookItem bookItem = bookItems.get(item.getOrder());
+                intentUpdate.putExtra("name",bookItem.getName());
+                intentUpdate.putExtra("position",item.getOrder());
+                updateItemLauncher.launch(intentUpdate);
                 break;
             default:
                 return super.onContextItemSelected(item);
