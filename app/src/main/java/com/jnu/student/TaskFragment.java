@@ -92,7 +92,7 @@ public class TaskFragment extends Fragment {
                 // 根据位置设置tab的标题
                 switch (position) {
                     case 0:
-                        tab.setText("日常任务");
+                        tab.setText("每日任务");
                         break;
                     case 1:
                         tab.setText("每周任务");

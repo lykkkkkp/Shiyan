@@ -8,4 +8,13 @@
     <string name="textView">PlayTask</string>
     <string name="task_name">学习</string>
     <string name="task_point">33</string>
+    <string name="textview_show_reward_name">任务名称</string>
+    <string name="edittext_reward_name">玩游戏</string>
+    <string name="textview_show_reward_point">任务币</string>
+    <string name="reward_name">看小说</string>
+    <string name="reward_point">-20</string>
+    <string name="reward">奖励</string>
+    <string name="statistic">统计</string>
+    <string name="me">我</string>
+    <string name="task">任务</string>
 </resources>

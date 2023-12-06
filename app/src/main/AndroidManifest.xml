@@ -11,9 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyFirstApplication"
-        tools:targetApi="31">
+        tools:targetApi="33">
         <activity
-            android:name=".BookItemDetailsActivity"
+            android:name=".TaskDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RewardDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -1,4 +1,4 @@
-package com.jnu.student;
+/*package com.jnu.student;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -162,7 +162,7 @@ public class ShoppingListFragment extends Fragment {
          * Provide a reference to the type of views that you are using
          * (custom ViewHolder)
          */
-        public class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
+        /*public class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
             private final TextView textViewName;
 
             private final ImageView ImageViewNameItem;
@@ -198,7 +198,7 @@ public class ShoppingListFragment extends Fragment {
          * @param dataSet String[] containing the data to populate views to be used
          * by RecyclerView
          */
-        public BookItemAdapter(ArrayList<BookItem> dataSet) {
+        /*public BookItemAdapter(ArrayList<BookItem> dataSet) {
             bookItemArrayList = dataSet;
         }
 
@@ -230,5 +230,4 @@ public class ShoppingListFragment extends Fragment {
             return bookItemArrayList.size();
         }
     }
-
-}
+}*/

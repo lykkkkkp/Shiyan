@@ -1,5 +1,5 @@
 package com.jnu.student;
-
+import static com.jnu.student.RewardFragment.RewardList;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -215,8 +215,7 @@ public class DailyTaskFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     finishedData=new DataBank().LoadFinishedDataItems(requireActivity());
-                    if(finishedData.setPoint(dailyTaskArrayList.get(position).getPoint())) {
-                        finishedData.addFinishedDataItem(1,dailyTaskArrayList.get(position).getName(), dailyTaskArrayList.get(position).getPoint());
+                    if(finishedData.setPoint(dailyTaskArrayList.get(position).getPoint(), RewardList.get(position).getPoint())) {
                         new DataBank().SavaFinishedDataItems(requireActivity(), finishedData);
                     }
 

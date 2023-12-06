@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/T"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -16,7 +15,7 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="300"
             android:background="#3090F7"
             android:text="@string/textView"
@@ -25,31 +24,30 @@
             android:textSize="34sp" />
 
         <Button
-            android:id="@+id/add_task_button"
+            android:id="@+id/add_reward_button"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="61dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#3090F7"
             android:text="+"
-            android:textColor="#F6F2F2"
-            android:textSize="24sp" />
+            android:textColor="#FEFEFE"
+            android:textSize="20sp" />
     </LinearLayout>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/task_tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabGravity="fill"
-        app:tabIndicatorColor="@color/blue"
-        app:tabMode="fixed">
-
-
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/task_view_pager"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleview_reward"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/total_point"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#3090F7"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 </LinearLayout>
