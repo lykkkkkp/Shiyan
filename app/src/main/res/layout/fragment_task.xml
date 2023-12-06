@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/T"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2196F3"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="300"
+            android:background="#3090F7"
+            android:text="@string/textView"
+            android:textAlignment="textStart"
+            android:textColor="#FEFEFE"
+            android:textSize="34sp" />
+
+        <Button
+            android:id="@+id/add_task_button"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="61dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="#3090F7"
+            android:text="+"
+            android:textColor="#F6F2F2"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/task_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/blue"
+        app:tabMode="fixed">
+
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/task_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>

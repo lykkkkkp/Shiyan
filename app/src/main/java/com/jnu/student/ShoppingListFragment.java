@@ -19,8 +19,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.jnu.student.date.BookItem;
-import com.jnu.student.date.DataBank;
+import com.jnu.student.data.BookItem;
+import com.jnu.student.data.DataBank;
 
 import java.util.ArrayList;
 

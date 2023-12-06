@@ -1,4 +1,4 @@
-package com.jnu.student.date;
+package com.jnu.student.data;
 
 import java.io.Serializable;
 
