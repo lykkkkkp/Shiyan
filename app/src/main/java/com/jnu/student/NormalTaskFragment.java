@@ -35,20 +35,13 @@ public class NormalTaskFragment extends Fragment {
     private static ArrayList<NormalTask> normalTaskList; // 任务列表
     private static NormalTaskFragment.TaskAdapter TaskAdapter;
     public TaskFinishedData finishedData;
+    private TextView total_point;
     public int flag=0;
 
     public NormalTaskFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NormalTaskFragment.
-     */
     // TODO: Rename and change types and number of parameters
     public static NormalTaskFragment newInstance(String param1, String param2) {
         NormalTaskFragment fragment = new NormalTaskFragment();
@@ -67,6 +60,8 @@ public class NormalTaskFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
+        int point=(new DataBank().LoadFinishedDataItems(requireActivity())).getPoint();
+        total_point.setText("目前总任务币："+point);
         flag=1;
 //        mainRecyclerView.setOnCreateContextMenuListener(this);
         TaskFragment.buttonAdd.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +93,7 @@ public class NormalTaskFragment extends Fragment {
 
         normalTaskList =new DataBank().LoadNormalTaskItems(requireActivity());
         if(0== normalTaskList.size()){
-            normalTaskList.add(new NormalTask("学习", 150, false));
+            normalTaskList.add(new NormalTask("学习", 130, false));
         }
 
 
@@ -226,6 +221,8 @@ public class NormalTaskFragment extends Fragment {
                     normalTaskList.remove(viewHolder.getAdapterPosition());
                     NormalTaskFragment.TaskAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
                     new DataBank().SavaNormalTaskItems(requireActivity(), normalTaskList);
+                    int point=(new DataBank().LoadFinishedDataItems(requireActivity())).getPoint();
+                    total_point.setText("目前总任务币："+point);
                 }
             });
             viewHolder.getTaskName().setText(normalTaskArrayList.get(position).getName());

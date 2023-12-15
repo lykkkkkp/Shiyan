@@ -17,4 +17,11 @@
     <string name="statistic">统计</string>
     <string name="me">我</string>
     <string name="task">任务</string>
+    <string name="textview_show_task_name">任务名称</string>
+    <string name="edittext_task_name">编辑任务名字</string>
+    <string name="textview_show_task_point">任务币数量</string>
+    <string name="hello_fragment">hello_fragment</string>
+    <string name="return_to_statistic">返回</string>
+    <string name="bill_name">任务名称</string>
+    <string name="bill_point">任务币</string>
 </resources>

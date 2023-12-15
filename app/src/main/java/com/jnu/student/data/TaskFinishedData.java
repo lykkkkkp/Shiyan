@@ -36,14 +36,17 @@ public class TaskFinishedData implements Serializable {
         itemArraylist.add(new Item(classes,name,point));
         return true;
     }
-    public boolean setPoint(int i, int point) {
-        int temp_point= this.point +i;
-        if(temp_point<0){
-            return false;
-        }
-        else {
-            this.point +=i;
+    public boolean setPoint(int classes,int i) {
+        if(classes!=4){
+            point+=i;
             return true;
+        }
+        else{
+            if(point>=i){
+                point-=i;
+                return true;
+            }
+            else return false;
         }
     }
 

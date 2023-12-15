@@ -37,6 +37,7 @@ public class WeeklyTaskFragment extends Fragment {
     private static ArrayList<WeeklyTask> weeklyTaskList; // 任务列表
     private static WeeklyTaskFragment.TaskAdapter TaskAdapter;
     public TaskFinishedData finishedData;
+    private TextView total_point;
     public int flag=0;
 
 
@@ -63,6 +64,8 @@ public class WeeklyTaskFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
+        int point=(new DataBank().LoadFinishedDataItems(requireActivity())).getPoint();
+        total_point.setText("目前总任务币："+point);
         flag=1;
         TaskFragment.buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,8 +95,9 @@ public class WeeklyTaskFragment extends Fragment {
 
         weeklyTaskList =new DataBank().LoadWeeklyTaskItems(requireActivity());
         if(0== weeklyTaskList.size()){
-            weeklyTaskList.add(new WeeklyTask("学习", 150, false));
+            weeklyTaskList.add(new WeeklyTask("学习", 110, false));
         }
+        total_point=TaskFragment.view.findViewById(R.id.total_point);
 
         TaskAdapter = new WeeklyTaskFragment.TaskAdapter(weeklyTaskList);
         mainRecyclerView.setAdapter(TaskAdapter);
@@ -218,6 +222,8 @@ public class WeeklyTaskFragment extends Fragment {
                     weeklyTaskList.remove(viewHolder.getAdapterPosition());
                     WeeklyTaskFragment.TaskAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
                     new DataBank().SavaWeeklyTaskItems(requireActivity(), weeklyTaskList);
+                    int point=(new DataBank().LoadFinishedDataItems(requireActivity())).getPoint();
+                    total_point.setText("目前总积分："+point);
                 }
             });
             viewHolder.getTaskName().setText(weeklytaskArrayList.get(position).getName());

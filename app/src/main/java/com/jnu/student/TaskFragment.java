@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,11 +16,14 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.jnu.student.data.DataBank;
 
 public class TaskFragment extends Fragment {
     private RecyclerView.Adapter fragmentAdapter;
     private TabLayout tabLayout;
     private ViewPager2 taskViewPager;
+    public static View view;
+    private TextView total_point;
     public DailyTaskFragment dailyTaskFragment;
     public WeeklyTaskFragment weeklyTaskFragment;
     public NormalTaskFragment normalTaskFragment;
@@ -52,10 +56,13 @@ public class TaskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_task, container, false);
+        view = inflater.inflate(R.layout.fragment_task, container, false);
         buttonAdd=view.findViewById(R.id.add_task_button);
         tabLayout = view.findViewById(R.id.task_tab_layout);
         taskViewPager = view.findViewById(R.id.task_view_pager);
+        total_point=view.findViewById(R.id.total_point);
+        int point=(new DataBank().LoadFinishedDataItems(requireActivity())).getPoint();
+        total_point.setText("目前总积分币："+point);
         return view;
 
     }

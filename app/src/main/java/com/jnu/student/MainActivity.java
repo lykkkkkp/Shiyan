@@ -42,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
                     return new TaskFragment();
                 case 1:
                     return new RewardFragment();
-                //case 2:
-                    //return new StatisticFragment();
-                //case 3:
-                    //return new MeFragment();
+                case 2:
+                    return new StatisticFragment();
+                case 3:
+                    return new MeFragment();
                 default:
                     return null;
             }
