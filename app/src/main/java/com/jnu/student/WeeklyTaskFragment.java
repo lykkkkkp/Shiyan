@@ -95,7 +95,7 @@ public class WeeklyTaskFragment extends Fragment {
 
         weeklyTaskList =new DataBank().LoadWeeklyTaskItems(requireActivity());
         if(0== weeklyTaskList.size()){
-            weeklyTaskList.add(new WeeklyTask("学习", 110, false));
+            weeklyTaskList.add(new WeeklyTask("学习", 200, false));
         }
         total_point=TaskFragment.view.findViewById(R.id.total_point);
 
@@ -214,7 +214,7 @@ public class WeeklyTaskFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     finishedData=new DataBank().LoadFinishedDataItems(requireActivity());
-                    if(finishedData.setPoint(weeklyTaskList.get(position).getPoint(), RewardList.get(position).getPoint())) {
+                    if(weeklyTaskList != null && position < weeklyTaskList.size() && RewardList != null && position < RewardList.size()) {
                         finishedData.addFinishedDataItem(2,weeklyTaskList.get(position).getName(), weeklyTaskList.get(position).getPoint());
                         new DataBank().SavaFinishedDataItems(requireActivity(), finishedData);
                     }
@@ -223,7 +223,7 @@ public class WeeklyTaskFragment extends Fragment {
                     WeeklyTaskFragment.TaskAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
                     new DataBank().SavaWeeklyTaskItems(requireActivity(), weeklyTaskList);
                     int point=(new DataBank().LoadFinishedDataItems(requireActivity())).getPoint();
-                    total_point.setText("目前总积分："+point);
+                    total_point.setText("目前总任务币："+point);
                 }
             });
             viewHolder.getTaskName().setText(weeklytaskArrayList.get(position).getName());

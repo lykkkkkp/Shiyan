@@ -62,7 +62,7 @@ public class TaskFragment extends Fragment {
         taskViewPager = view.findViewById(R.id.task_view_pager);
         total_point=view.findViewById(R.id.total_point);
         int point=(new DataBank().LoadFinishedDataItems(requireActivity())).getPoint();
-        total_point.setText("目前总积分币："+point);
+        total_point.setText("目前总任务币："+point);
         return view;
 
     }

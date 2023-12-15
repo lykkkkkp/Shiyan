@@ -93,7 +93,7 @@ public class NormalTaskFragment extends Fragment {
 
         normalTaskList =new DataBank().LoadNormalTaskItems(requireActivity());
         if(0== normalTaskList.size()){
-            normalTaskList.add(new NormalTask("学习", 130, false));
+            normalTaskList.add(new NormalTask("学习", 100, false));
         }
 
 
@@ -213,7 +213,7 @@ public class NormalTaskFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     finishedData=new DataBank().LoadFinishedDataItems(requireActivity());
-                    if(finishedData.setPoint(normalTaskList.get(position).getPoint(), RewardList.get(position).getPoint())) {
+                    if(normalTaskList != null && position < normalTaskList.size() && RewardList != null && position < RewardList.size()) {
                         finishedData.addFinishedDataItem(3,normalTaskList.get(position).getName(), normalTaskList.get(position).getPoint());
                         new DataBank().SavaFinishedDataItems(requireActivity(), finishedData);
                     }

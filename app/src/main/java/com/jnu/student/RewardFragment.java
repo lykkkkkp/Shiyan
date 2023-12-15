@@ -78,7 +78,7 @@ public class RewardFragment extends Fragment {
         buttonAdd=rootView.findViewById(R.id.add_reward_button);
         total_point=rootView.findViewById(R.id.total_point);
         int point2=(new DataBank().LoadFinishedDataItems(requireActivity())).getPoint();
-        total_point.setText("目前总积分："+point2);
+        total_point.setText("目前总任务币："+point2);
         RewardFragment.buttonAdd.setOnClickListener(new View.OnClickListener() { // 通过MyApp.button引用按钮对象
             @Override
             public void onClick(View v) {
@@ -94,6 +94,7 @@ public class RewardFragment extends Fragment {
         RewardList =new DataBank().LoadRewardItems(requireActivity());
         if(0== RewardList.size()){
             RewardList.add(new Reward("打游戏", 200));
+            RewardList.add(new Reward("看视频", 300));
         }
 
 
@@ -211,21 +212,26 @@ public class RewardFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     finishedData=new DataBank().LoadFinishedDataItems(requireActivity());
-                    if(finishedData.setPoint(4,RewardList.get(position).getPoint())) {
-                        finishedData.addFinishedDataItem(4,RewardList.get(position).getName(), (-1)*RewardList.get(position).getPoint());
-                        new DataBank().SavaFinishedDataItems(requireActivity(), finishedData);
+                    int adapterPosition = viewHolder.getAdapterPosition();
+                    if (adapterPosition >= 0 && adapterPosition < RewardList.size()) {
+                        // 现在可以安全地访问和修改 RewardList
+                        Reward reward = RewardList.get(adapterPosition);
+                        if(finishedData.setPoint(4, RewardList.get(adapterPosition).getPoint())) {
+                            finishedData.addFinishedDataItem(4, reward.getName(), (-1) * reward.getPoint());
+                            new DataBank().SavaFinishedDataItems(requireActivity(), finishedData);
 
-                        RewardList.remove(viewHolder.getAdapterPosition());
-                        RewardFragment.RewardAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-                        new DataBank().SavaRewardItems(requireActivity(), RewardList);
+                            RewardList.remove(adapterPosition);
+                            RewardFragment.RewardAdapter.notifyItemRemoved(adapterPosition);
+                            new DataBank().SavaRewardItems(requireActivity(), RewardList);
 
-                        int point=(new DataBank().LoadFinishedDataItems(requireActivity())).getPoint();
-                        total_point.setText("目前总积分："+point);
+                            int point=(new DataBank().LoadFinishedDataItems(requireActivity())).getPoint();
+                            total_point.setText("目前总积分："+point);
+                        }
                     }
                     else{
                         AlertDialog.Builder builder=new AlertDialog.Builder(requireActivity());
                         builder.setTitle("提示");
-                        builder.setMessage("积分币不足！");
+                        builder.setMessage("任务币不足！");
                         builder.create().show();
                         viewHolder.getCheckBox().setChecked(false);
                     }
