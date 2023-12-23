@@ -7,12 +7,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop = "true"
+        android:background="@color/blue"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/purple_200"
+            android:background="@color/blue"
             android:orientation="horizontal">
 
             <TextView
@@ -20,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="300"
-                android:background="@color/purple_200"
+                android:background="@color/blue"
                 android:text="@string/textView"
                 android:textAlignment="textStart"
                 android:textColor="#FEFEFE"
@@ -30,7 +31,7 @@
                 android:id="@+id/btn_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/purple_200"
+                android:backgroundTint="@color/blue"
                 android:text="登出"
                 android:textColor="#FEFEFE"
                 android:textSize="20sp" />
@@ -48,7 +49,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:padding="8dp"
-                android:src="@drawable/book_no_name" />
+                android:src="@drawable/touxiang" />
 
             <TextView
                 android:id="@+id/txt_username"
@@ -66,6 +67,7 @@
             android:layout_height="38dp"
             android:layout_marginBottom="16dp"
             android:text="   好好学习，天天向上"
+            android:background="@color/blue"
             android:textSize="20sp" />
 
         <Button
@@ -73,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="编辑个人资料"
-            android:background="@color/purple_200"
+            android:background="@color/blue"
             android:textColor="#FEFEFE"/>
 
         <Button
@@ -81,7 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="帮助与支持"
-            android:background="@color/purple_200"
+            android:background="@color/blue"
             android:textColor="#FEFEFE"/>
 
         <Button
@@ -89,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="关于"
-            android:background="@color/purple_200"
+            android:background="@color/blue"
             android:textColor="#FEFEFE"/>
 
         <!-- 安全退出 -->
@@ -98,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="反馈"
-            android:background="@color/purple_200"
+            android:background="@color/blue"
             android:textColor="#FEFEFE"/>
 
         <ScrollView

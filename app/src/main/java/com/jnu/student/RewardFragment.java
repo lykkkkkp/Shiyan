@@ -20,6 +20,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,7 +61,7 @@ public class RewardFragment extends Fragment {
     public void onResume(){
         super.onResume();
         int point=(new DataBank().LoadFinishedDataItems(requireActivity())).getPoint();
-        total_point.setText("目前总积分："+point);
+        total_point.setText("目前总任务币："+point);
     }
     @Override
     public void onDestroy () {
@@ -90,11 +91,14 @@ public class RewardFragment extends Fragment {
 
         RecyclerView mainRecyclerView = rootView.findViewById(R.id.recycleview_reward);
         mainRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        mainRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
 
         RewardList =new DataBank().LoadRewardItems(requireActivity());
         if(0== RewardList.size()){
             RewardList.add(new Reward("打游戏", 200));
-            RewardList.add(new Reward("看视频", 300));
+            RewardList.add(new Reward("看视频", 200));
+            RewardList.add(new Reward("出去逛街", 200));
+            RewardList.add(new Reward("吃零食", 100));
         }
 
 

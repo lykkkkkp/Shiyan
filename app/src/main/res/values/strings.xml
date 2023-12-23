@@ -24,4 +24,5 @@
     <string name="return_to_statistic">返回</string>
     <string name="bill_name">任务名称</string>
     <string name="bill_point">任务币</string>
+    <string name="bill_time">时间</string>
 </resources>

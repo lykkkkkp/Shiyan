@@ -57,6 +57,7 @@ public class BillActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull BillAdapter.ViewHolder viewHolder, int position) {
             viewHolder.getBillName().setText(finishedDataList.itemArraylist.get(position).getItemName());
+            viewHolder.getBillTime().setText(finishedDataList.itemArraylist.get(position).getTime());
             if(4 == finishedDataList.itemArraylist.get(position).getClasses()) {
                 viewHolder.getBillPoint().setText("-"+finishedDataList.itemArraylist.get(position).getItemPoint());
                 viewHolder.getBillPoint().setTextColor(Color.RED);
@@ -75,12 +76,14 @@ public class BillActivity extends AppCompatActivity {
         public class ViewHolder extends RecyclerView.ViewHolder {
             private final TextView BillName;
             private final TextView BillPoint;
+            private final TextView BillTime;
 
             public ViewHolder(View BillView){
                 super(BillView);
 
                 BillName=BillView.findViewById(R.id.bill_name);
                 BillPoint=BillView.findViewById(R.id.bill_point);
+                BillTime=BillView.findViewById(R.id.bill_time);
             }
 
             public TextView getBillName() {
@@ -90,6 +93,7 @@ public class BillActivity extends AppCompatActivity {
             public TextView getBillPoint() {
                 return BillPoint;
             }
+            public TextView getBillTime() {return BillTime;}
         }
     }
 }

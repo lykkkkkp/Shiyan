@@ -13,6 +13,13 @@
         android:layout_weight="1"
         android:text="@string/bill_name"
         android:textSize="20sp" />
+    <TextView
+        android:id="@+id/bill_time"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/bill_time"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/bill_point"

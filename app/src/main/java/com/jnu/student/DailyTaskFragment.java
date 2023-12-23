@@ -18,6 +18,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -94,10 +95,15 @@ public class DailyTaskFragment extends Fragment {
 
         mainRecyclerView = rootView.findViewById(R.id.Recycleview_daily_task);
         mainRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        mainRecyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
 
         dailyTaskList =new DataBank().LoadDailyTaskItems(requireActivity());
         if(0== dailyTaskList.size()){
-            dailyTaskList.add(new DailyTask("学习", 150, false));
+            dailyTaskList.add(new DailyTask("学习", 100, false));
+            dailyTaskList.add(new DailyTask("语文作业", 100, false));
+            dailyTaskList.add(new DailyTask("数学作业", 100, false));
+            dailyTaskList.add(new DailyTask("英语作业", 100, false));
+            dailyTaskList.add(new DailyTask("全部作业", 50, false));
         }
         total_point=TaskFragment.view.findViewById(R.id.total_point);
         TaskAdapter = new DailyTaskFragment.TaskAdapter(dailyTaskList);
@@ -215,16 +221,21 @@ public class DailyTaskFragment extends Fragment {
             viewHolder.getCheckBox().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    finishedData=new DataBank().LoadFinishedDataItems(requireActivity());
-                    if(finishedData.setPoint(1,dailyTaskArrayList.get(position).getPoint())) {
-                        new DataBank().SavaFinishedDataItems(requireActivity(), finishedData);
-                    }
+                    int position = viewHolder.getAdapterPosition();
+                    if (position >= 0 && position < dailyTaskList.size()) {
+                        finishedData = new DataBank().LoadFinishedDataItems(requireActivity());
+                        if (finishedData.setPoint(1, dailyTaskArrayList.get(position).getPoint())) {
+                            finishedData.addFinishedDataItem(1, dailyTaskArrayList.get(position).getName(), dailyTaskArrayList.get(position).getPoint());
+                            new DataBank().SavaFinishedDataItems(requireActivity(), finishedData);
+                        }
 
-                    dailyTaskList.remove(viewHolder.getAdapterPosition());
-                    TaskAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-                    new DataBank().SavaDailyTaskItems(requireActivity(), dailyTaskList);
-                    int point=(new DataBank().LoadFinishedDataItems(requireActivity())).getPoint();
-                    total_point.setText("目前总积分："+point);
+                        dailyTaskList.remove(position);
+                        TaskAdapter.notifyItemRemoved(position);
+                        new DataBank().SavaDailyTaskItems(requireActivity(), dailyTaskList);
+                        int point = (new DataBank().LoadFinishedDataItems(requireActivity())).getPoint();
+                        total_point.setText("目前总任务币：" + point);
+
+                    }
                 }
             });
             viewHolder.getTaskName().setText(dailyTaskArrayList.get(position).getName());
